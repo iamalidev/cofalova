@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { ShoppingBag, Plus, Minus, X } from 'lucide-react';
+import { ShoppingBag, Plus, Minus, X, MapPin } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
    CONSTANTS & DATA
@@ -86,13 +86,23 @@ function IntroScreen({ lang, setLang, onMenuClick }) {
         </div>
       </header>
 
-      <div className="relative z-10 flex-1 flex flex-col justify-end items-center pb-12">
+      <div className="relative z-10 flex-1 flex flex-col justify-end items-center pb-12 gap-5">
         <button 
           onClick={onMenuClick}
           className="bg-black/50 backdrop-blur-md border border-white/20 text-white font-semibold tracking-[0.15em] uppercase text-[15px] px-12 py-3.5 rounded-full hover:bg-white/20 active:scale-95 transition-all duration-300 cursor-pointer"
         >
           {ui[lang].menu}
         </button>
+        
+        <a 
+          href="https://yandex.uz/maps/-/CXQ-NHZN" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors bg-black/40 px-5 py-2 rounded-full backdrop-blur-md border border-white/10"
+        >
+          <MapPin size={16} className="text-[#c4f042]" />
+          {lang === 'UZ' ? 'Adres' : 'Адрес'}
+        </a>
       </div>
     </div>
   );
@@ -113,8 +123,19 @@ export default function App() {
   const [contentKey, setContentKey] = useState(0);
 
   /* Cart state */
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = localStorage.getItem('cofalova_cart');
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
   const [cartOpen, setCartOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('cofalova_cart', JSON.stringify(cart));
+  }, [cart]);
 
   /* Carousel progress */
   const [progress, setProgress] = useState(0);
@@ -308,7 +329,7 @@ export default function App() {
     const id = currentId;
     setCart((prev) => ({
       ...prev,
-      [id]: { name: currentDish.name, nameUz: currentDish.nameUz, price: currentDish.price, image: currentData.image, qty: (prev[id]?.qty || 0) + 1 },
+      [id]: { name: currentDish.name, nameUz: currentDish.nameUz, price: currentDish.price, image: currentDish.image || currentData.image, qty: (prev[id]?.qty || 0) + 1 },
     }));
     firefly();
     spawnConfetti(ctaBtnRef.current);
@@ -455,7 +476,7 @@ export default function App() {
             )}
 
             {/* ── BOTTOM NAVIGATION ── */}
-            <nav ref={navRef} className="flex-shrink-0 px-4 pb-5 pt-1 flex gap-2 overflow-x-auto no-scrollbar relative pointer-events-auto" style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%)' }}>
+            <nav ref={navRef} className="flex-shrink-0 px-4 pb-6 sm:pb-8 pt-1 flex gap-2 overflow-x-auto no-scrollbar relative pointer-events-auto" style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%)' }}>
               {categoryKeys.map((cat) => (
                 <button key={cat} data-active={activeCategory === cat} onClick={() => handleCategoryChange(cat)} className={`nav-item-hover flex-shrink-0 px-4 py-2.5 rounded-xl text-[13px] font-medium whitespace-nowrap transition-all duration-300 cursor-pointer ${activeCategory === cat ? 'glass-active border-2 border-lime-accent text-white shadow-lg shadow-lime-accent/10' : 'glass text-white/80 hover:text-white hover:bg-white/5'}`}>{catName(cat)}</button>
               ))}
@@ -510,12 +531,12 @@ export default function App() {
                   )}
                 </div>
                 {Object.keys(cart).length > 0 && (
-                  <div className="px-5 pb-5 pt-3 flex-shrink-0 border-t border-gray-100">
+                  <div className="px-5 pb-8 sm:pb-5 pt-3 flex-shrink-0 border-t border-gray-100">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-sm text-gray-500">{ui[lang].total}</span>
                       <span className="text-lg font-bold text-gray-900">{formatPrice(cartTotalPrice)} {ui[lang].currency}</span>
                     </div>
-                    <button onClick={clearCart} className="w-full py-3 rounded-xl bg-[#3a3530] text-white font-semibold text-sm hover:bg-[#2a2520] transition-colors cursor-pointer">{ui[lang].clear}</button>
+                    <button onClick={clearCart} className="w-full py-3.5 rounded-xl bg-[#3a3530] text-white font-semibold text-sm hover:bg-[#2a2520] transition-colors cursor-pointer">{ui[lang].clear}</button>
                   </div>
                 )}
               </div>
