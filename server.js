@@ -78,7 +78,16 @@ app.post('/api/upload', authenticate, upload.single('image'), (req, res) => {
   res.json({ url: '/' + req.file.filename });
 });
 
-const PORT = 3000;
+// Serve static frontend files (from Vite build and public folder for uploads)
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Catch-all route to serve the React app for any other requests (Client-side routing)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`API Server running on http://localhost:${PORT}`);
+  console.log(`API Server running on port ${PORT}`);
 });
