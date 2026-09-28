@@ -1,196 +1,21 @@
 {
-  "Завтраки": {
-    "nameUz": "Nonushtalar",
-    "image": "/breakfast_plate.png",
+  "Кофе": {
+    "nameUz": "Kofe",
+    "image": "/placeholder.png",
+    "dishes": []
+  },
+  "Круассан": {
+    "nameUz": "Kruassan",
     "dishes": [
       {
-        "id": "dish-1",
-        "name": "Яйца Бенедикт",
-        "nameUz": "Benedikt tuxumi",
-        "description": "Классические яйца пашот на тосте с голландским соусом, беконом и свежей зеленью.",
-        "descriptionUz": "Gollandiya sousi, bekon va yangi ko'katlar bilan klassik tost ustidagi pashot tuxumlari.",
-        "price": 48000
-      },
-      {
-        "id": "dish-2",
-        "name": "Французский омлет",
-        "nameUz": "Frantsuz omleti",
-        "description": "Нежный омлет с сыром, грибами трюфеля и свежими травами.",
-        "descriptionUz": "Pishloq, tryufel qo'ziqorinlari va yangi o'tlar bilan nozik omlet.",
-        "price": 42000
-      },
-      {
-        "id": "dish-3",
-        "name": "Авокадо тост",
-        "nameUz": "Avokado tost",
-        "description": "Хрустящий тост с авокадо, яйцом пашот, микрозеленью и семенами чиа.",
-        "descriptionUz": "Avokado, pashot tuxumi, mikro-ko'katlar va chia urug'lari bilan tost.",
-        "price": 38000,
+        "id": "dish-1790533803046",
+        "name": "Круассан Вельвет",
+        "nameUz": "Kruassan Velvet",
+        "description": "Большой сет вафель с топпингом на выбор: бельгийский шоколад / Nutella / фисташковый шоколад",
+        "descriptionUz": "Belgiya shokoladi / Nutella / pista shokoladi kabi qo'shimchalar bilan katta vafli to'plami",
+        "price": 33000,
+        "image": "/upload-1790533802979-992222848.jpg",
         "isNew": true
-      }
-    ]
-  },
-  "Сет Завтрак": {
-    "nameUz": "Set Nonushta",
-    "image": "/breakfast_set.png",
-    "dishes": [
-      {
-        "id": "dish-4",
-        "name": "Утренний Сет",
-        "nameUz": "Ertalabki Set",
-        "description": "Круассан, йогурт с гранолой, свежие ягоды, свежевыжатый апельсиновый сок и капучино.",
-        "descriptionUz": "Kruassan, granolali yogurt, yangi rezavorlar, yangi siqilgan apelsin sharbati va kapuchino.",
-        "price": 85000
-      },
-      {
-        "id": "dish-5",
-        "name": "Бранч Делюкс",
-        "nameUz": "Brunch Deluxe",
-        "description": "Яйца Бенедикт, мини-блинчики с кленовым сиропом, фруктовая тарелка и латте.",
-        "descriptionUz": "Benedikt tuxumi, klyonli siropli mini-blinchiklar, meva tarelkasi va latte.",
-        "price": 120000
-      }
-    ]
-  },
-  "Салаты": {
-    "nameUz": "Salatlar",
-    "image": "/burrata_salad.png",
-    "dishes": [
-      {
-        "id": "dish-6",
-        "name": "Салат Буррата",
-        "nameUz": "Burrata Salati",
-        "description": "Нежная буррата со сладкими томатами, соусом песто, свежим базиликом и кедровыми орехами.",
-        "descriptionUz": "Shirin pomidorlar, pesto sousi, yangi rayhon va kedr yong'oqlari bilan nozik burrata.",
-        "price": 62500,
-        "isNew": true
-      },
-      {
-        "id": "dish-7",
-        "name": "Цезарь с креветками",
-        "nameUz": "Qisqichbaqa Sezar",
-        "description": "Хрустящий романо, тигровые креветки на гриле, пармезан и домашний соус Цезарь.",
-        "descriptionUz": "Qarsildoq romano, grilidagi yo'lbars qisqichbaqalari, parmezan va uy Sezar sousi.",
-        "price": 58000
-      },
-      {
-        "id": "dish-8",
-        "name": "Нисуаз",
-        "nameUz": "Nisuaz",
-        "description": "Тунец на гриле, яйцо пашот, стручковая фасоль, оливки и картофель с винегретом.",
-        "descriptionUz": "Grildagi tunets, pashot tuxumi, loviya, zaytun va kartoshka vinegret bilan.",
-        "price": 55000
-      }
-    ]
-  },
-  "Сэндвичи": {
-    "nameUz": "Sendvichlar",
-    "image": "/sandwich_plate.png",
-    "dishes": [
-      {
-        "id": "dish-9",
-        "name": "Клаб Сэндвич",
-        "nameUz": "Klab Sendvich",
-        "description": "Тройной сэндвич с курицей гриль, беконом, авокадо, томатами и соусом айоли.",
-        "descriptionUz": "Gril tovuq, bekon, avokado, pomidor va ayoli sousi bilan uch qavatli sendvich.",
-        "price": 52000
-      },
-      {
-        "id": "dish-10",
-        "name": "Панини с лососем",
-        "nameUz": "Losos Paninisi",
-        "description": "Хрустящий панини с копчёным лососем, сливочным сыром, каперсами и рукколой.",
-        "descriptionUz": "Dudlangan losos, krem pishloq, kapers va rukkola bilan qarsildoq panini.",
-        "price": 56000
-      }
-    ]
-  },
-  "Супы": {
-    "nameUz": "Sho'rvalar",
-    "image": "/soup_bowl.png",
-    "dishes": [
-      {
-        "id": "dish-11",
-        "name": "Томатный крем-суп",
-        "nameUz": "Pomidor krem-sho'rvasi",
-        "description": "Бархатистый крем-суп из спелых томатов с базиликом, сливками и хрустящими крутонами.",
-        "descriptionUz": "Pishgan pomidorlardan baxmal krem-sho'rva, rayhon, qaymoq va qarsildoq krutonlar bilan.",
-        "price": 35000
-      },
-      {
-        "id": "dish-12",
-        "name": "Тыквенный суп",
-        "nameUz": "Oshqovoq sho'rvasi",
-        "description": "Нежный суп из запечённой тыквы с имбирём, кокосовым молоком и тыквенными семечками.",
-        "descriptionUz": "Pishirilgan oshqovoqdan nozik sho'rva, zanjabil, kokos suti va oshqovoq urug'lari bilan.",
-        "price": 38000
-      }
-    ]
-  },
-  "Горячее": {
-    "nameUz": "Issiq taomlar",
-    "image": "/hot_dish.png",
-    "dishes": [
-      {
-        "id": "dish-13",
-        "name": "Стейк Рибай",
-        "nameUz": "Ribay Steyk",
-        "description": "Мраморная говядина на гриле с овощами, розмарином и соусом из красного вина.",
-        "descriptionUz": "Marmar mol go'shti grilda, sabzavotlar, rozmarin va qizil vino sousi bilan.",
-        "price": 145000
-      },
-      {
-        "id": "dish-14",
-        "name": "Лосось терияки",
-        "nameUz": "Teriyaki Losos",
-        "description": "Филе лосося в глазури терияки с рисом, эдамамэ и маринованным имбирём.",
-        "descriptionUz": "Teriyaki glazuridagi losos filesi, guruch, edamame va tuzlangan zanjabil bilan.",
-        "price": 98000,
-        "isNew": true
-      }
-    ]
-  },
-  "Десерты": {
-    "nameUz": "Desertlar",
-    "image": "/dessert_plate.png",
-    "dishes": [
-      {
-        "id": "dish-15",
-        "name": "Тирамису",
-        "nameUz": "Tiramisu",
-        "description": "Классический итальянский десерт с маскарпоне, эспрессо и какао-порошком.",
-        "descriptionUz": "Maskarpone, espresso va kakao kukuni bilan klassik italyan deserti.",
-        "price": 42000
-      },
-      {
-        "id": "dish-16",
-        "name": "Чизкейк Нью-Йорк",
-        "nameUz": "Nyu-York Chizkejk",
-        "description": "Бархатистый чизкейк на хрустящей основе с ягодным соусом и мятой.",
-        "descriptionUz": "Qarsildoq asosdagi baxmal chizkejk, rezavor sousi va yalpiz bilan.",
-        "price": 45000
-      }
-    ]
-  },
-  "Напитки": {
-    "nameUz": "Ichimliklar",
-    "image": "/drinks_glass.png",
-    "dishes": [
-      {
-        "id": "dish-17",
-        "name": "Фирменный Лимонад",
-        "nameUz": "Firma Limonadi",
-        "description": "Освежающий домашний лимонад с лавандой, мятой и свежими ягодами.",
-        "descriptionUz": "Lavanda, yalpiz va yangi rezavorlar bilan tetiklantiruvchi uy limonadi.",
-        "price": 28000
-      },
-      {
-        "id": "dish-18",
-        "name": "Авторский коктейль",
-        "nameUz": "Muallif Kokteyli",
-        "description": "Изысканный коктейль с фруктами, льдом и свежими травами от шеф-бармена.",
-        "descriptionUz": "Shef-barmendan mevalar, muz va yangi o'tlar bilan nafis kokteyl.",
-        "price": 55000
       }
     ]
   }

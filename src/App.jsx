@@ -68,13 +68,16 @@ function LoadingScreen({ active, progress }) {
 function IntroScreen({ lang, setLang, onMenuClick }) {
   return (
     <div className="absolute inset-0 z-[50] flex flex-col bg-black">
-      <video
-        autoPlay loop muted playsInline
-        poster="/cafe_intro_bg.png"
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
-        src="/intro.mp4" 
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/50" />
+      <div className="absolute inset-0 w-full h-full flex flex-col sm:flex-row opacity-80">
+        <video autoPlay loop muted playsInline className="w-full h-1/3 sm:w-1/3 sm:h-full object-cover" src="/kadr-1.webm" />
+        <video autoPlay loop muted playsInline className="w-full h-1/3 sm:w-1/3 sm:h-full object-cover" src="/kadr-2.webm" />
+        <video autoPlay loop muted playsInline className="w-full h-1/3 sm:w-1/3 sm:h-full object-cover" src="/kadr-3.webm" />
+      </div>
+      
+      {/* GLOBAL SHADOWS */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/50 z-[2]" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/90 to-transparent z-[5] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black/90 to-transparent z-[5] pointer-events-none" />
 
       <header className="relative z-10 flex items-center justify-between px-5 pt-6">
         <h1 className="text-2xl sm:text-3xl font-serif font-bold tracking-wider text-white text-shadow italic">
@@ -202,7 +205,6 @@ export default function App() {
     }
 
     categoryKeys.forEach((c) => {
-      const img = new Image();
       const onLoadOrError = () => {
         loaded++;
         setLoadProgress(Math.round((loaded / total) * 100));
@@ -210,9 +212,17 @@ export default function App() {
           setTimeout(() => setIsLoading(false), 500);
         }
       };
+      
+      const firstDishImage = menuData[c].dishes?.[0]?.image;
+      if (!firstDishImage) {
+        onLoadOrError();
+        return;
+      }
+      
+      const img = new Image();
       img.onload = onLoadOrError;
       img.onerror = onLoadOrError;
-      img.src = menuData[c].image;
+      img.src = firstDishImage;
     });
   }, [menuData]); // Re-run when data is fetched
 
@@ -329,7 +339,7 @@ export default function App() {
     const id = currentId;
     setCart((prev) => ({
       ...prev,
-      [id]: { name: currentDish.name, nameUz: currentDish.nameUz, price: currentDish.price, image: currentDish.image || currentData.image, qty: (prev[id]?.qty || 0) + 1 },
+      [id]: { name: currentDish.name, nameUz: currentDish.nameUz, price: currentDish.price, image: currentDish.image || '/placeholder.png', qty: (prev[id]?.qty || 0) + 1 },
     }));
     firefly();
     spawnConfetti(ctaBtnRef.current);
@@ -376,11 +386,20 @@ export default function App() {
           onTouchEnd={handleTouchEnd}
         >
           {/* ── FULL-SCREEN BACKGROUND ── */}
-          {categoryKeys.map((cat) => (
-            <div key={cat} className="absolute inset-0 bg-transition" style={{ opacity: activeCategory === cat ? 1 : 0, zIndex: activeCategory === cat ? 1 : 0 }}>
-              <img key={`${cat}-${contentKey}-${currentDishIndex}`} src={menuData[cat].image} alt={cat} className={`h-full w-full object-cover ${activeCategory === cat ? 'ken-burns' : ''}`} loading="eager" />
-            </div>
-          ))}
+          {categoryKeys.map((cat) => {
+             const activeDish = activeCategory === cat ? currentDish : menuData[cat].dishes[0];
+             const bgImage = activeDish?.image || '';
+             
+             return (
+              <div key={cat} className="absolute inset-0 bg-transition" style={{ opacity: activeCategory === cat ? 1 : 0, zIndex: activeCategory === cat ? 1 : 0 }}>
+                {bgImage ? (
+                  <img key={`${cat}-${contentKey}-${currentDishIndex}`} src={bgImage} alt={cat} className={`h-full w-full object-cover ${activeCategory === cat ? 'ken-burns' : ''}`} loading="eager" />
+                ) : (
+                  <div className="h-full w-full bg-[#0a0a0a]" />
+                )}
+              </div>
+            );
+          })}
 
           {/* Dark overlays */}
           <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/90 via-black/45 to-black/35" />

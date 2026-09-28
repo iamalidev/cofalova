@@ -95,7 +95,6 @@ export default function Admin() {
   const [showCatModal, setShowCatModal] = useState(false);
   const [newCatName, setNewCatName] = useState('');
   const [newCatNameUz, setNewCatNameUz] = useState('');
-  const [catImageFile, setCatImageFile] = useState(null);
 
   const [showDishModal, setShowDishModal] = useState(false);
   const [editingDish, setEditingDish] = useState(null);
@@ -186,14 +185,9 @@ export default function Admin() {
   // Add Category
   const handleAddCategory = async () => {
     if (!newCatName) return;
-    let imageUrl = '/placeholder.png';
-    if (catImageFile) {
-      imageUrl = await handleImageUpload(catImageFile);
-    }
     const newData = { ...data };
     newData[newCatName] = {
       nameUz: newCatNameUz || newCatName,
-      image: imageUrl,
       dishes: []
     };
     saveData(newData);
@@ -201,7 +195,6 @@ export default function Admin() {
     setSelectedCategory(newCatName);
     setNewCatName('');
     setNewCatNameUz('');
-    setCatImageFile(null);
   };
 
   // Delete Category
@@ -345,7 +338,6 @@ export default function Admin() {
             onClick={() => {
               setNewCatName('');
               setNewCatNameUz('');
-              setCatImageFile(null);
               setShowCatModal(true);
               setIsSidebarOpen(false);
             }}
@@ -465,13 +457,6 @@ export default function Admin() {
                 <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider font-semibold">Nomi (UZ) *</label>
                 <input value={newCatNameUz} onChange={e => setNewCatNameUz(e.target.value)} className="w-full bg-gray-900/80 text-white border border-gray-700 rounded-xl px-4 py-3 focus:border-[#c4f042] focus:ring-1 focus:ring-[#c4f042] outline-none transition-all text-sm" placeholder="Masalan: Qahva" />
               </div>
-              
-              <ImageUploadZone 
-                label="Orqa fon rasmi (majburiy emas)" 
-                file={catImageFile} 
-                onChange={setCatImageFile} 
-                onClear={() => setCatImageFile(null)}
-              />
             </div>
             <div className="flex gap-3 md:gap-4 mt-8">
               <button onClick={() => setShowCatModal(false)} className="flex-1 py-3 text-gray-300 bg-gray-700 rounded-xl hover:bg-gray-600 font-semibold transition-colors">Bekor qilish</button>
